@@ -1,5 +1,11 @@
 ﻿"use strict";
 
+// ---------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------- ClassicChat ------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
+
+debugger;
+
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
 //Disable the send button until connection is established.
@@ -15,6 +21,9 @@ connection.on("ReceiveMessage", function (user, message) {
 });
 
 connection.start().then(function () {
+    
+    console.log("connection started successfully :D")
+    
     document.getElementById("sendButton").disabled = false;
 }).catch(function (err) {
     return console.error(err.toString());
@@ -27,4 +36,26 @@ document.getElementById("sendButton").addEventListener("click", function (event)
         return console.error(err.toString());
     });
     event.preventDefault();
+});
+
+// ---------------------------------------------------------------------------------------------------------------------
+// ------------------------------------- BackgroundServices ------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------------------------
+
+debugger;
+
+var connectionBackgroundService = new signalR.HubConnectionBuilder().withUrl("/backgroundService").build();
+
+connectionBackgroundService.on("ShowTime", function (actualTime) {
+    
+    console.log("hello background service " + actualTime);
+    
+});
+
+connectionBackgroundService.start().then(function () {
+    
+    console.log("connectionBackgroundService started successfully :D")
+    
+}).catch(function (err) {
+    return console.error(err.toString());
 });

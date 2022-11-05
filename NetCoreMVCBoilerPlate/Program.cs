@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NetCoreMVCBoilerPlate.BackgroundServices;
 using NetCoreMVCBoilerPlate.Data;
 using NetCoreMVCBoilerPlate.Hubs;
 
@@ -16,6 +17,9 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddSignalR();
+
+builder.Services.AddHostedService<ConsumeScopedServiceHostedService>();
+builder.Services.AddScoped<IScopedProcessingService, ScopedProcessingServiceHub>();
 
 var app = builder.Build();
 
@@ -45,5 +49,6 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.MapHub<ChatHub>("/chatHub");
+app.MapHub<ClockHub>("/backgroundService");
 
 app.Run();
