@@ -4,7 +4,7 @@
 // -------------------------------------------- ClassicChat ------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------------------------
 
-debugger;
+// debugger;
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
@@ -42,11 +42,11 @@ document.getElementById("sendButton").addEventListener("click", function (event)
 // ------------------------------------- BackgroundServices ------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------------------------
 
-debugger;
+// debugger;
 
 var connectionBackgroundService = new signalR.HubConnectionBuilder().withUrl("/backgroundService").build();
 
-connectionBackgroundService.on("ShowTime", function (actualTime) {
+connectionBackgroundService.on("SendToClientsData", function (actualTime) {
     
     console.log("hello background service " + actualTime);
     

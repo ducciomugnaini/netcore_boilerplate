@@ -49,6 +49,6 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.MapHub<ChatHub>("/chatHub");
-app.MapHub<ClockHub>("/backgroundService");
+app.MapHub<BackgroundServiceHub>("/backgroundService");
 
 app.Run();

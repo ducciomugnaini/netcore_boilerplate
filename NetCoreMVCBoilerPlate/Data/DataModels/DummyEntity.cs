@@ -1,4 +1,7 @@
-﻿namespace NetCoreMVCBoilerPlate.Data.DataModels;
+﻿#pragma warning disable CS8618
+
+namespace NetCoreMVCBoilerPlate.Data.DataModels;
+
 
 public class DummyEntity
 {
@@ -6,3 +9,4 @@ public class DummyEntity
    public string DummyFirstName { get; set; }
    public string DummyLastName { get; set; }
 }
+#pragma warning restore CS8618

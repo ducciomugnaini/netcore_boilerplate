@@ -12,9 +12,9 @@ internal class ScopedProcessingServiceHub : IScopedProcessingService
 {
    private int executionCount = 0;
    private readonly ILogger _logger;
-   private readonly IHubContext<ClockHub, IClock> _clockHub;
+   private readonly IHubContext<BackgroundServiceHub, IBackgroundServiceHubStrongTyped> _clockHub;
 
-   public ScopedProcessingServiceHub(ILogger<ScopedProcessingServiceHub> logger, IHubContext<ClockHub, IClock> clockHub)
+   public ScopedProcessingServiceHub(ILogger<ScopedProcessingServiceHub> logger, IHubContext<BackgroundServiceHub, IBackgroundServiceHubStrongTyped> clockHub)
    {
       _logger = logger;
       _clockHub = clockHub;
@@ -28,7 +28,7 @@ internal class ScopedProcessingServiceHub : IScopedProcessingService
 
          _logger.LogInformation("Scoped Processing Service is working. Count: {Count}", executionCount);
          
-         await _clockHub.Clients.All.ShowTime(DateTime.Now);
+         await _clockHub.Clients.All.SendToClientsData(DateTime.Now);
          
          await Task.Delay(10000, stoppingToken);
       }
